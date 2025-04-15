@@ -60,7 +60,7 @@ resource "tls_private_key" "ssh" {
   rsa_bits  = 2048
 }
 
-resource "aws_key_pair" "generated_key" {
+resource "aws_key_pair" "generated_keys" {
   key_name   = "my-ec2-key"
   public_key = tls_private_key.ssh.public_key_openssh
 }
@@ -76,7 +76,7 @@ resource "aws_instance" "ec2_block" {
   ami = data.aws_ami.amazon_linux.id
   instance_type = var.instance_type
   subnet_id = aws_subnet.public.id
-   key_name      = aws_key_pair.generated_key.key_name
+   key_name      = aws_key_pair.generated_keys.key_name
 
    tags = {
      Name = "my_ec2"
