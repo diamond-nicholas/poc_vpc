@@ -73,7 +73,7 @@ resource "local_file" "private_key" {
 
 
 resource "aws_instance" "ec2_block" {
-  ami = data.aws_ami.amazon_linux
+  ami = data.aws_ami.amazon_linux.id
   instance_type = var.instance_type
   subnet_id = aws_subnet.public.id
    key_name      = aws_key_pair.generated_key.key_name
